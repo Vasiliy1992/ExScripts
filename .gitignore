@@ -1,0 +1,18 @@
+# My Scripts
+Test/
+ChkSRMN/
+
+# Cache
+__pycache__/
+
+# My test scripts
+/UserScripts/SMARreboot.py
+
+/Utils/SetCameraTime.sh
+/Utils/logger_StartCapture.sh
+
+# Configs
+#/Starvisor/.starvisor.cfg
+#/UpArchives/.uparchives.cfg
+#/UploadCSV/.up_csv.cfg
+
