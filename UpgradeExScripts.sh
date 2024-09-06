@@ -17,11 +17,13 @@ save_configs() {
 
 update_scripts() {
 	echo "Step 2 of 3. Upgrade scripts."
+	# Go to the script folder
 	cd $(dirname $0)
 	# Stash the cahnges
 	git stash
 	# Pull new code from github
 	git pull
+	# Go to previous directory
 	cd -
 }
 
