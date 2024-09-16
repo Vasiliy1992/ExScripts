@@ -95,7 +95,6 @@ form_csv_fold() {
 
 		if [ -s ./uniq_arch.list ]; then
 			# If there are elements in the list of unique archives, then:
-			echo -e "\n \n"
 			extract_csv $ARCH $tempFold $tempFold/uniq_arch.list
 		else
 			#If the list of unique archives is empty:
