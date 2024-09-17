@@ -66,8 +66,7 @@ sudo nano /etc/apt/sources.list
 ```
 deb http://archive.debian.org/debian/ jessie main non-free contrib
 deb-src http://archive.debian.org/debian/ jessie main non-free contrib
-deb http://archive.debian.org/debian-security/ jessie/updates main non-free
-contrib
+deb http://archive.debian.org/debian-security/ jessie/updates main non-free contrib
 deb-src http://archive.debian.org/debian-security/ jessie/updates main non-free contrib
 ```
 
@@ -86,7 +85,7 @@ deb http://deb.debian.org/debian buster main contrib non-free
 ```
 Сохранить изменениия: **Ctr+O**.
 Закрыть редактор: **Ctr+X**.
-### 1.3. Обновить список репозиториев:
+### 1.3. Обновить список репозиториев
 ```
 sudo apt-get update
 ```
@@ -100,11 +99,11 @@ W: Failed to fetch http://build.openvpn.net/debian/openvpn/stable/dists/xenial/I
 sudo apt-get install debian-archive-keyring
 sudo apt-get update
 ```
-## 2. Установить пакеты:
+## 2. Установить пакеты
 
 * Для **Raspberry Pi4 Buster** и **Raspberry Pi4 Bullseye**:
 ```
-pip install dropbox
+pip3 install dropbox
 pip install yadisk
 sudo apt install figlet ftp-upload incron
 ```
@@ -134,9 +133,9 @@ git clone https://github.com/Vasiliy1992/ExScripts.git
 
 В соответствующие папки:
 
-- **~/source/UploadCSV**/.up_csv.cfg  
-- **~/source/UpArchives**/.uparchives.cfg 
-- **~/source/Starvisor**/.starvisor.cfg 
+- **~/source/ExScripts/UploadCSV**/.up_csv.cfg  
+- **~/source/ExScripts/UpArchives**/.uparchives.cfg 
+- **~/source/ExScripts/Starvisor**/.starvisor.cfg 
 
 где "**~**" - домашняя директория (**/home/pi** или **/home/rms** в последних версиях).  
 
@@ -250,7 +249,7 @@ alias uparch='~/source/ExScripts/UpArchives/UpArchives.sh'
 
 **cklog** - отображение текущего лога **RMS** в окне удалённого терминала (удобно при подключении по **ssh**);  
 **exscript** - принудительный запуск "внешнего скрипта" - постпроцесса;  
-**uparch** - ринудительный запуск загрузки архивов.  
+**uparch** - принудительный запуск загрузки архивов.  
 
 # Интернет-ресурсы
 
