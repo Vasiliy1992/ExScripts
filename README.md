@@ -89,12 +89,7 @@ deb http://deb.debian.org/debian buster main contrib non-free
 ```
 sudo apt-get update
 ```
-В случае появления ошибки (устаревшая **Raspberry Pi3 B+ Jessie**):
-```
-W: GPG error: http://archive.debian.org jessie Release: The following signatures were invalid: KEYEXPIRED 1587841717
-W: Failed to fetch http://build.openvpn.net/debian/openvpn/stable/dists/xenial/InRelease  Unable to find expected entry 'main/binary-armhf/Packages' in Release file (Wrong sources.list entry or malformed file)
-```
-Выполнить:
+В случае появления ошибки (устаревшая **Raspberry Pi3 B+ Jessie**), выполнить:
 ```
 sudo apt-get install debian-archive-keyring
 sudo apt-get update
