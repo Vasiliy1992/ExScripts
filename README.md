@@ -6,7 +6,7 @@
 
 ![Карта расположения станций](https://sun9-22.userapi.com/impg/JGGJCNlv7AOLHDvGvG7XxKrXFumi8wOMUoUZ9Q/KmM-aq6yIHc.jpg?size=837x717&quality=96&sign=fb18f0e06e173bdb89468c209823abdd&type=album)
 
-# Назначение:
+# Назначение
 
 * Загрузка **csv**-файлов в облачные хранилища [Dropbox](https://www.dropbox.com/scl/fo/yikgso2z4ryaomtkzf4k5/h?rlkey=lts3izkjqrjdbonw66yd7gutk&st=rjbr3pwz&dl=0) и [Яндекс-диск](https://disk.yandex.ru/d/OZFWYsc6uEfvCQ);
 * Загрузка архивов в централизованное **FTP**-хранилище (для доступа обратитесь к [автору проекта](https://vk.com/rdaneel_olivaw));
@@ -19,7 +19,7 @@
 
 Также свяжитесь с [Ильёй Янковским](https://vk.com/jankowsky) для создания [персональной страницы станции](https://starvisor.ru/meteor/) на сайте [проекта Starvisor](https://starvisor.ru/contacts/). После этого вы получите [третий конфигурационный файл загрузки](Starvisor/.starvisor.cfg).
 
-В конечном итоге вы должны иметь:
+В конечном итоге вы должны получить:
 
 * Персональную страницу на сайте [проекта Starvisor](https://starvisor.ru/meteor/);
 * Три конфигурационных файла (обратите внимание, что файлы с точкой являются скрытыми. Включите отображение скрытых файлов!):
@@ -132,7 +132,7 @@ git clone https://github.com/Vasiliy1992/ExScripts.git
 - **~/source/ExScripts/UpArchives**/.uparchives.cfg 
 - **~/source/ExScripts/Starvisor**/.starvisor.cfg 
 
-где "**~**" - домашняя директория (**/home/pi** или **/home/rms** в последних версиях).  
+где "**~**" - домашняя директория (**/home/pi** или **/home/rms** в последних сборках).  
 
 Для этого используйте любой удобный для вас способ:
 
@@ -145,10 +145,19 @@ git clone https://github.com/Vasiliy1992/ExScripts.git
 ```
 nano ~/source/RMS/.config
 ```
-Изменить следующие параметры:
+Изменить путь к "внешнему скрипту" следующим образом:
 ```
-; external_script_path: /home/pi/source/ExScripts/MainExScript.py
+external_script_path: /home/pi/source/ExScripts/MainExScript.py
+```
+> [!WARNING]
+> В последних сборках (начиная с **Raspberry Pi4 Bullseye**) используйте **/home/rms** вместо **/home/pi**.
 
+Для **Raspberry Pi4 Bullseye**:
+```
+external_script_path: /home/rms/source/ExScripts/MainExScript.py
+```
+А также изменить параметры:
+```
 ; Directory for log files
 log_dir: logs/RMS_logs
 
@@ -178,12 +187,17 @@ sudo incrontab -e
 ```
 /home/pi/RMS_data/live.jpg IN_MODIFY /home/pi/source/ExScripts/Starvisor/live_vps.sh
 ```
-> [!WARNING]
-> В последних версиях (начиная с **Raspberry Pi4 Bullseye**) используйте **/home/rms** вместо **/home/pi**.  
-
+Для **Raspberry Pi4 Bullseye**:
+```
+/home/rms/RMS_data/live.jpg IN_MODIFY /home/rms/source/ExScripts/Starvisor/live_vps.sh
+```
 Проверить работу скрипта (тестовое изображение должно появиться на сайте):
 ```
 cp /home/pi/source/ExScripts/Starvisor/live.jpg /home/pi/RMS_data
+```
+Для **Raspberry Pi4 Bullseye**:
+```
+cp /home/rms/source/ExScripts/Starvisor/live.jpg /home/rms/RMS_data
 ```
 
 ## 6. Настройка загрузки архивов
