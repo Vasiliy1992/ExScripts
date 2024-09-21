@@ -98,8 +98,8 @@ sudo apt-get update
 
 * Для **Raspberry Pi4 Buster** и **Raspberry Pi4 Bullseye**:
 ```
-pip3 install dropbox
-pip install yadisk
+pip install dropbox
+pip3 install yadisk
 sudo apt install figlet ftp-upload incron
 ```
 
