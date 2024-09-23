@@ -9,7 +9,7 @@ get_log_dir(){
 					'/^log_dir:/{print $2}'\
 					 $HOME/source/RMS/.config\
 	)
-	echo $log_fold
+#	echo $log_fold
 }
 
 
@@ -18,7 +18,7 @@ get_current_log(){
 		ls --sort=time $log_fold/* \
 		| head -1\
 	)
-	echo $log
+#	echo $log
 }
 
 
