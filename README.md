@@ -242,7 +242,7 @@ nano ~/.bashrc
 
 ```
 # Check RMS log
-alias cklog='~/source/ExScripts/UserScripts/CheckLog.sh'
+alias cklog='~/source/Utils/UserScripts/CheckLog.sh'
 
 # Running an external script
 alias exscript='~/source/ExScripts/MainExScript.sh'
