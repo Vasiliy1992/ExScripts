@@ -245,7 +245,7 @@ nano ~/.bashrc
 alias cklog='~/source/Utils/UserScripts/CheckLog.sh'
 
 # Running an external script
-alias exscript='~/source/ExScripts/MainExScript.sh'
+alias exscript='~/source/ExScripts/MainExScripts/MainExScript.sh'
 
 # Upload archives
 alias uparch='~/source/ExScripts/UpArchives/UpArchives.sh'
