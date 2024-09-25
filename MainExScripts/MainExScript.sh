@@ -4,7 +4,11 @@ LOG_DIR="$HOME/RMS_data/logs/ExScript"
 
 
 print_logo() {
-	figlet -ckt "RMS EXTERNAL SCRIPT"
+	figlet \
+		-c \
+		-k \
+		-t \
+			"RMS EXTERNAL SCRIPT"
 	printf "STARTING EXTERNAL SCRIPT...\n"
 }
 
@@ -50,7 +54,7 @@ logger() {
 	# Get current datetime
 	now=$(date +%F_%T)
 	# Create log folder
-	mkdir -p $2
+	mkdir --parents $2
 	# Execute script
 	$1 2>&1 | tee $2/$Name.$now.log
 }
