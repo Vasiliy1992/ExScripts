@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Script for extracting CSV files from archives with sorting and uploading to cloud storage
+#############################################################################################
+# Script for extracting CSV files from archives with sorting and uploading to cloud storage #
+#############################################################################################
 
 source $(dirname $0)/.up_csv.cfg
 

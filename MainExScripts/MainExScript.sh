@@ -1,5 +1,13 @@
 #!/bin/bash
 
+##################################################
+# Running postprocess scripts (external scripts) #
+##################################################
+
+# CapturedFiles folder (RMS reports)
+capt=$1
+
+# Folder for writing logs
 LOG_DIR="$HOME/RMS_data/logs/ExScript"
 
 
@@ -13,31 +21,20 @@ print_logo() {
 }
 
 
-last_dir() {
-	#Last CaptutedFiles folder
-	capt=$(\
-            ls \
-                -t \
-                --directory \
-                             $HOME/RMS_data/CapturedFiles/* \
-                                                                 | head -1
-                                                                           )
-    printf "\nLatest captured dir: \n$capt \n=============================================================\n"
-}
-
-
 rmsExternal() {
+	printf "\nCurrent captured dir: \n$capt \n=============================================================\n"
+
 	printf "\n\n1. Reboot camera\n================\n"
 	"$HOME/source/ExScripts/Utils/CameraReboot.sh"
 
 	printf "\n\n2. Upload CapturedStack to www.starvisor.ru\n===========================================\n"
-	"$HOME/source/ExScripts/Starvisor/capstack.sh"
+	"$HOME/source/ExScripts/Starvisor/capstack.sh" $capt
 
 	printf "\n\n3. Upload csv-files to cloud storages\n=====================================\n"
 	"$HOME/source/ExScripts/UploadCSV/Extract_CSV.sh"
 
 	printf "\n\n4. Starting Check_and_Clean\n===========================\n"
-	"$HOME/source/ExScripts/RMS_extra_tools/Check_and_Clean.sh" $1
+	"$HOME/source/ExScripts/RMS_extra_tools/Check_and_Clean.sh" $capt
 
 	printf "\n\n5. Upload archives to FTP-storage\n=================================\n"
 	"$HOME/source/ExScripts/UpArchives/UpArchives.sh"
@@ -62,8 +59,7 @@ logger() {
 
 main() {
 	print_logo
-	last_dir
-	rmsExternal $capt
+	rmsExternal
 }
 
 

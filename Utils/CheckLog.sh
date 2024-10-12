@@ -1,9 +1,14 @@
 #!/bin/bash
 
+#############################################
+# Script for viewing the current log on SSH #
+#############################################
+
 # Number of lines of the current log to display
 N=100
 
 
+# Get path to log folder from configuration file
 get_log_dir(){
 	log_fold="$HOME/RMS_data/"$(awk \
 					'/^log_dir:/{print $2}'\
@@ -13,6 +18,7 @@ get_log_dir(){
 }
 
 
+# Get path to current log
 get_current_log(){
 	log=$(\
 		ls --sort=time $log_fold/* \
@@ -22,6 +28,7 @@ get_current_log(){
 }
 
 
+# Display information about the current log
 disp_info(){
 	clear
 	echo -e "\n\tOpen current log:

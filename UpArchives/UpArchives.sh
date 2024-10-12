@@ -1,7 +1,11 @@
 #!/bin/bash
 
-source $(dirname $0)/.uparchives.cfg
+################################################################
+# Uploading archives to FTP storage.			       #
+# Uploading reports on the station status to the same storage. #
+################################################################
 
+source $(dirname $0)/.uparchives.cfg
 
 up_archive(){
 	rsync \
@@ -31,3 +35,4 @@ main(){
 main
 
 exit 0
+

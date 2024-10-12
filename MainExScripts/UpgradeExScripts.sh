@@ -1,6 +1,8 @@
 #!/bin/bash
 
-# Script for updates all scripts from GitHub repository/
+#########################################################
+# Script for updates all scripts from GitHub repository #
+#########################################################
 
 SAVE_CONFIG_FOLDER=$HOME/.ExScriptsConfigs
 

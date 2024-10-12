@@ -1,25 +1,24 @@
 #!/bin/bash
 
+###############################################################
+# Uploading the captured stack to the Starvisor website page. #
+# Removing incorrect temporary files.			      #
+###############################################################
+
 source $(dirname $0)/.starvisor.cfg
 
-#Path of the last directory with captured files
-path=$(\
-	ls \
-		-t\
-		--directory $HOME/RMS_data/CapturedFiles/* \
-		| head -n 1\
-	)
+echo "Working: directory: $1"
 
-#Captured stack pattern
-image=$path/*_captured_stack.jpg
+# Captured stack pattern
+image="$1/*_captured_stack.jpg"
 
-#Name for temporary file
-stack=$path/$ID.jpg
+# Name for temporary file
+stack="$1/$ID.jpg"
 
-#Create a temporary file
+# Create a temporary file
 cp $image $stack
 
-#Uploading a temporary file to the server
+# Uploading a temporary file to the server
 ftp-upload \
 		--verbose \
 		--host $FTP_LIVE \
@@ -28,10 +27,10 @@ ftp-upload \
 		--passive \
 			$stack
 
-#Delete temporary file
+# Delete temporary file
 rm $stack
 
-#Delete incorrect temporary files
+# Delete incorrect temporary files
 find \
 	~/RMS_data \
 	-maxdepth 1 \
@@ -40,3 +39,4 @@ find \
 	-delete
 
 exit 0
+

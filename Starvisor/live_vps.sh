@@ -1,5 +1,11 @@
 #!/bin/bash
 
+#####################################################################
+# Uploading the current FF file to the Starvisor website page.	    #
+# Uploading the current FF file to the server to create timelapses. #
+# Creating a folder with FF files on the current PC (optional).	    #
+#####################################################################
+
 source $(dirname $0)/.starvisor.cfg
 
 
@@ -65,3 +71,4 @@ main(){
 main
 
 exit 0
+

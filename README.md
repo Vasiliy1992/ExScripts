@@ -158,6 +158,13 @@ external_script_path: /home/rms/source/ExScripts/MainExScript.py
 ```
 А также изменить параметры:
 ```
+; Enable running an external script at the end of every night. it will be passed
+; three arguments: captured_night_dir, archived_night_dir, config
+external_script_run: true
+
+; Reboot the computer daily after processing and upload
+reboot_after_processing: false
+
 ; Directory for log files
 log_dir: logs/RMS_logs
 
