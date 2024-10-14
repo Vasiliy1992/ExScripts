@@ -4,10 +4,28 @@
 # Camera Reboot Script #
 ########################
 
-echo "Camera reboot..."
+# Old distribution of RPi3
+OLD_DIST='"Raspbian GNU/Linux 8 (jessie)"'
 
 # Activate RMS
 cd $HOME/source/RMS
 source $HOME/vRMS/bin/activate
 
-python3 -m Utils.CameraControl reboot
+# Read the current computer's distribution
+DIST="$(cat /etc/os-release | awk -F"=" '/^PRETTY_NAME/{print $2}')"
+
+#echo -e "Older distribution:\t" $OLD_DIST
+#echo -e "Installed distribution:\t" $DIST
+
+echo -e "\nCamera reboot..."
+
+# Compare versions and run supported script
+if [ "$DIST" = "$OLD_DIST" ]; then
+#	echo "Old"
+	python -m Utils.CameraControl27 reboot
+else
+#	echo "New"
+	python3 -m Utils.CameraControl reboot
+fi
+
+exit 0
