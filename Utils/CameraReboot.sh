@@ -17,11 +17,10 @@ DIST="$(cat /etc/os-release | awk -F"=" '/^PRETTY_NAME/{print $2}')"
 #echo -e "Older distribution:\t" $OLD_DIST
 #echo -e "Installed distribution:\t" $DIST
 
-echo -e "\nCamera reboot..."
-
 # Compare versions and run supported script
 if [ "$DIST" = "$OLD_DIST" ]; then
 #	echo "Old"
+	echo -e "\nCamera reboot..."
 	python -m Utils.CameraControl27 reboot
 else
 #	echo "New"
