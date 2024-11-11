@@ -22,7 +22,7 @@ print_logo() {
 
 
 rmsExternal() {
-	printf "\nCurrent captured dir: \n$capt \n=============================================================\n"
+	printf "\nCurrent captured dir: \n$capt \n==============================================================\n"
 
 	printf "\n\n1. Reboot camera\n================\n"
 	"$HOME/source/ExScripts/Utils/CameraReboot.sh"
