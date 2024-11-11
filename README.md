@@ -77,12 +77,6 @@ deb-src http://archive.debian.org/debian-security/ jessie/updates main non-free 
 deb-src http://raspbian.raspberrypi.org/raspbian/ buster main contrib non-free rpi
 ```
 
-* **Raspberry Pi4 Bullseye**  
-Добавить последней строкой:
-```
-# For incron
-deb http://deb.debian.org/debian buster main contrib non-free
-```
 Сохранить изменениия: **Ctr+O**.
 Закрыть редактор: **Ctr+X**.
 ### 1.3. Обновить список репозиториев
@@ -100,20 +94,27 @@ sudo apt-get update
 ```
 pip install dropbox
 pip3 install yadisk
-sudo apt install figlet ftp-upload incron
+sudo apt install entr figlet ftp-upload
 ```
 
 * Для устаревшей **Raspberry Pi3 B+ Jessie**
 ```
 pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org dropbox
 
-cd
+cd source
 git clone https://github.com/ivknv/yadisk
 cd yadisk
 git checkout 45652154d017f8bc62a0ecc5079b0379a33a9689
 sudo python3 setup.py install
 
-sudo apt install bc figlet ftp-upload incron
+cd ~/source
+git clone https://github.com/eradman/entr.git
+cd entr
+./configure
+make test
+sudo make install
+
+sudo apt install bc figlet ftp-upload
 ```
 ## 3. Клонировать репозиторий
 ```
@@ -173,39 +174,36 @@ live_jpg: true
 ```
 Если какой-либо из параметров отсутствует, введите его вручную.
 
-## 5. Настроить **incron**
+## 5. Настроить **entr**
+Добавить скрипт отслеживания изменений файла **live.jpg** в автозапуск:
+* Для устаревшей **Raspberry Pi3 Jessie**:
 ```
-sudo nano /etc/incron.allow
+sudo nano /home/pi/.config/lxsession/LXDE-pi/autostart
 ```
-Ввести единственную строку:
+* Для  **Raspberry Pi4 Buster** и **Bullseye**:
 ```
-root
+sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
 ```
-Перезапустить сервис:
+Перед строкой **@xscreensaver -no-splash** вставить:
+* Для **Raspberry Pi3 Jessie** и **Raspberry Pi4 Buster**:
 ```
-sudo systemctl start incron.service
-systemctl status incron.service
+# Starvisor
+/home/pi/source/ExScripts/Starvisor/entr_run.sh &
 ```
-Настроить запуск скрипта:
+* Для **Raspberry Pi4 Bullseye**:
 ```
-sudo incrontab -e
+# Starvisor
+/home/rms/source/ExScripts/Starvisor/entr_run.sh &
 ```
-Скопировать и вставить строку:
+Для проверки работы перезагрузить систему:
 ```
-/home/pi/RMS_data/live.jpg IN_MODIFY /home/pi/source/ExScripts/Starvisor/live_vps.sh
+sudo reboot
 ```
-Для **Raspberry Pi4 Bullseye**:
+После загрузки скопировать тестовый файл:
 ```
-/home/rms/RMS_data/live.jpg IN_MODIFY /home/rms/source/ExScripts/Starvisor/live_vps.sh
+cp ~/source/ExScripts/Starvisor/live.jpg ~/RMS_data
 ```
-Проверить работу скрипта (тестовое изображение должно появиться на сайте):
-```
-cp /home/pi/source/ExScripts/Starvisor/live.jpg /home/pi/RMS_data
-```
-Для **Raspberry Pi4 Bullseye**:
-```
-cp /home/rms/source/ExScripts/Starvisor/live.jpg /home/rms/RMS_data
-```
+Затем проверить страницу станции.
 
 ## 6. Настройка загрузки архивов
 Отредактировать файл:
