@@ -50,7 +50,8 @@ PRETTY_NAME=**"Debian GNU/Linux 11 (bullseye)"** для сборки **Raspberry
 
 > [!WARNING]
 > По состоянию на 16 сентября 2024 года **Raspberry Pi3 B+ Jessie** и **Raspberry Pi4 Buster** больше **не поддерживаются**!  
-> Образы недоступны для [скачивания](https://globalmeteornetwork.org/wiki/index.php?title=Installing_OS_onto_a_Raspberry_Pi).
+> Но образы **пока ещё** доступны для [скачивания](https://globalmeteornetwork.org/projects/sd_card_images/).  
+> **UPD:** Поддержка **Raspberry Pi3 B+ Jessie** [продлена до 1 июля 2025 года](https://globalmeteornetwork.groups.io/g/main/message/12670).
 
 ### 1.2. Отредактировать список репозиториев в консольном текстовом редакторе **NANO**
 
