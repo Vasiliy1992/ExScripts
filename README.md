@@ -42,16 +42,17 @@ cat /etc/os-release
 ```
 
 Определить значение параметра в первой строке: **'PRETTY_NAME='**  
-В зависимости от версии ОС и модели компьютера она будет иметь следующий вид:  
+В зависимости от версии ОС и модели компьютера данная строка будет иметь следующий вид:  
 
 PRETTY_NAME=**"Raspbian GNU/Linux 8 (jessie)"** для сборки **Raspberry Pi3 B+ Jessie**  
 PRETTY_NAME=**"Raspbian GNU/Linux 10 (buster)"** для сборки **Raspberry Pi4 Buster**  
 PRETTY_NAME=**"Debian GNU/Linux 11 (bullseye)"** для сборки **Raspberry Pi4 Bullseye**  
 
 > [!WARNING]
-> По состоянию на 16 сентября 2024 года **Raspberry Pi3 B+ Jessie** и **Raspberry Pi4 Buster** больше **не поддерживаются**!  
-> Но образы **пока ещё** доступны для [скачивания](https://globalmeteornetwork.org/projects/sd_card_images/).  
-> **UPD:** Поддержка **Raspberry Pi3 B+ Jessie** [продлена до 1 июля 2025 года](https://globalmeteornetwork.groups.io/g/main/message/12670).
+> На сегодняшний день образы **Raspberry Pi3 B+ Jessie** и **Raspberry Pi4 Buster** **устарели**!  
+> Но **пока ещё** доступны для [скачивания](https://globalmeteornetwork.org/projects/sd_card_images/).  
+> Поддержка **Raspberry Pi3 B+ Jessie** [осуществляется до 1 июля 2025 года](https://globalmeteornetwork.groups.io/g/main/message/12670).
+> После указанной даты дистрибутив **будет работать**, но **не будет получать обновлений**.
 
 ### 1.2. Отредактировать список репозиториев в консольном текстовом редакторе **NANO**
 
