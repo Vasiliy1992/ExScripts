@@ -10,8 +10,10 @@ source $(dirname $0)/.uparchives.cfg
 up_archive(){
 	rsync \
 		--archive \
-		--verbose \
+		--compress \
 		--protocol=29 \
+		--progress \
+		--stats \
 				$HOME/RMS_data/ArchivedFiles/*.tar.bz2 \
 				$SERVER:/home/srmn/archives/$ID
 }
