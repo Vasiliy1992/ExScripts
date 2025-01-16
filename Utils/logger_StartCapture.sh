@@ -48,4 +48,4 @@ LOG_DIR="$HOME/RMS_data/logs/logger_StartCapture"
 mkdir --parents $LOG_DIR
 
 # Write the standard output of the module to the log
-$HOME/Desktop/RMS_StartCapture.sh 2>&1 | tee $LOG_DIR/RMS_StartCapture_$(date +%F_%T).log
+$HOME/Desktop/RMS_StartCapture.sh 2>&1 | tee $LOG_DIR/$(hostname)_RMS_StartCapture_$(date +%F_%T).log
