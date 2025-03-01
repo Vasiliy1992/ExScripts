@@ -10,6 +10,12 @@ capt=$1
 # Folder for writing logs
 LOG_DIR="$HOME/RMS_data/logs/ExScript"
 
+# Folder with scripts location
+LOCATION=$(dirname \
+		$(readlink \
+			--canonicalize $0)\
+						)"/../.."
+
 
 print_logo() {
 	figlet \
@@ -22,22 +28,23 @@ print_logo() {
 
 
 rmsExternal() {
+
 	printf "\nCurrent captured dir: \n$capt \n==============================================================\n"
 
 	printf "\n\n1. Reboot camera\n================\n"
-	"$HOME/source/ExScripts/Utils/CameraReboot.sh"
+	"$LOCATION/ExScripts/Utils/CameraReboot.sh"
 
 	printf "\n\n2. Upload CapturedStack to www.starvisor.ru\n===========================================\n"
-	"$HOME/source/ExScripts/Starvisor/capstack.sh" $capt
+	"$LOCATION/ExScripts/Starvisor/capstack.sh" $capt
 
 	printf "\n\n3. Upload csv-files to cloud storages\n=====================================\n"
-	"$HOME/source/ExScripts/UploadCSV/Extract_CSV.sh"
+	"$LOCATION/ExScripts/UploadCSV/UploadCSV.sh"
 
 	printf "\n\n4. Starting Check_and_Clean\n===========================\n"
-	"$HOME/source/ExScripts/RMS_extra_tools/Check_and_Clean.sh" $capt
+	"$LOCATION/ExScripts/RMS_extra_tools/Check_and_Clean.sh" $capt
 
 	printf "\n\n5. Upload archives to FTP-storage\n=================================\n"
-	"$HOME/source/ExScripts/UpArchives/UpArchives.sh"
+	"$LOCATION/ExScripts/UpArchives/UpArchives.sh"
 
 	printf "\n\n6. Reboot RPi...\n"
 	sudo reboot
@@ -64,5 +71,6 @@ main() {
 
 
 logger main $LOG_DIR
+
 
 exit 0
