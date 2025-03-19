@@ -244,7 +244,7 @@ sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
 ```
 Для проверки работы запустить **entr**:
 ```
-/home/rms/source/ExScripts/Starvisor/entr_run.sh
+~/source/ExScripts/Starvisor/entr_run.sh
 ```
 И скопировать файл:
 ```
