@@ -8,7 +8,7 @@
 > Ознакомьтесь с [руководством по сборке и настройке станции](https://disk.yandex.ru/d/kr1lVkyqDzQY-Q).
 > В противном случае вы не сможете работать с данным программным обеспечением.
 
-Описание всех скриптов дано в руководстве ["Описание дополнительных скриптов"](https://disk.yandex.ru/d/kr1lVkyqDzQY-Q).
+Описание всех скриптов дано в [руководстве](https://disk.yandex.ru/d/kr1lVkyqDzQY-Q).
 
 ![Карта расположения станций](https://sun9-22.userapi.com/impg/JGGJCNlv7AOLHDvGvG7XxKrXFumi8wOMUoUZ9Q/KmM-aq6yIHc.jpg?size=837x717&quality=96&sign=fb18f0e06e173bdb89468c209823abdd&type=album)
 
@@ -21,7 +21,7 @@
 
 # Перед установкой
 
-Обратитесь к [автору проекта](https://vk.com/rdaneel_olivaw) для получения [конфигурационного файла загрузки csv-файлов](UploadCSV/.up_csv.cfg) в облачные хранилища [Dropbox](https://www.dropbox.com/scl/fo/yikgso2z4ryaomtkzf4k5/h?rlkey=lts3izkjqrjdbonw66yd7gutk&st=rjbr3pwz&dl=0) и [Яндекс-диск](https://disk.yandex.ru/d/OZFWYsc6uEfvCQ),  а также для получения [конфигурационного файла загрузки архивов на FTP-сервер](UpArchives/.uparchives.cfg), IP-адреса, номера порта, логина и пароля.
+Обратитесь к [автору проекта](https://vk.com/rdaneel_olivaw) для получения [конфигурационного файла загрузки csv-файлов](UploadCSV/.up_csv.cfg) в облачные хранилища [Dropbox](https://www.dropbox.com/scl/fo/yikgso2z4ryaomtkzf4k5/h?rlkey=lts3izkjqrjdbonw66yd7gutk&st=rjbr3pwz&dl=0) и [Яндекс-диск](https://disk.yandex.ru/d/OZFWYsc6uEfvCQ),  а также для получения [конфигурационного файла загрузки архивов на FTP-сервер](UpArchives/.uparchives.cfg), **IP**-адреса, номера порта, логина и пароля.
 
 Также свяжитесь с [Ильёй Янковским](https://vk.com/jankowsky) для создания [персональной страницы станции](https://starvisor.ru/meteor/) на сайте [проекта Starvisor](https://starvisor.ru/contacts/). После этого вы получите [третий конфигурационный файл загрузки](Starvisor/.starvisor.cfg).
 
@@ -46,7 +46,7 @@
 > [!WARNING]
 > Перед установкой сделайте резервную копию системы и данных!
 
-Создайте папку
+Создайте папку:
 ```
 mkdir ~/.ExScriptsConfigs
 ```
@@ -68,7 +68,7 @@ chmod +x ./install.sh
 /etc/apt/sources.list.bak
 ~/source/RMS/.config.bak
 /etc/xdg/lxsession/LXDE-pi/autostart.bak
-/home/pi/.config/lxsession/LXDE-pi/autostart.bak (для Raspberry Pi3 Jessie)
+/home/pi/.config/lxsession/LXDE-pi/autostart.bak (для **Raspberry Pi3 Jessie**)
 /etc/hosts.bak
 ~/.ssh/config
 ~/.bashrc.bak
@@ -250,7 +250,7 @@ sudo nano /etc/xdg/lxsession/LXDE-pi/autostart
 ```
 cp ~/source/ExScripts/Starvisor/live.jpg ~/RMS_data
 ```
-Затем проверить **страницу** станции.
+Затем проверить **страницу станции**.
 
 Перезагрузить систему:
 ```
