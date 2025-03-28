@@ -312,6 +312,12 @@ alias exscript='~/source/ExScripts/Utils/ExScript_last_dir.sh'
 
 # Upload archives
 alias uparch='~/source/ExScripts/UpArchives/UpArchives.sh'
+
+# Start TunnelIPCamera
+alias tnlcam='~/source/ExScripts/Utils/TunnelIPCamera.sh'
+
+# Upload CSV-files
+alias upcsv='~/source/ExScripts/UploadCSV/UploadCSV.sh'
 ```
 Перезапустите:
 ```
@@ -321,7 +327,9 @@ alias uparch='~/source/ExScripts/UpArchives/UpArchives.sh'
 
 **cklog** - отображение текущего лога **RMS** в окне удалённого терминала (удобно при подключении по **ssh**);  
 **exscript** - принудительный запуск "внешнего скрипта" - постпроцесса;  
-**uparch** - принудительный запуск загрузки архивов.  
+**uparch** - принудительный запуск загрузки архивов;  
+**tnlcam** - запуск туннелирования камеры;  
+**upcsv** - запуск загрузки csv-файлов.  
 
 # Интернет-ресурсы
 
