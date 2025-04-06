@@ -2,18 +2,18 @@
 
 # Automatic installation script
 
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-# Tested on Raspberry Pi4 buster
-# Tested on Raspberry Pi4 billseye
-# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! #
+# Tested on Raspberry Pi4 buster   #
+# Tested on Raspberry Pi4 billseye #
+# Tested on Raspberry Pi3 Jessie   #
+# !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! #
 
 
 
 echo "
 WARNING!
-This script is experimental. It is intended for installing additional software on RMS meteor stations based on Raspberry Pi 3.
-This version has not been tested on the Raspberry Pi3 and on the Raspberry Pi4 (booster).
-Before starting the installation, save all data and make a backup copy of the data.
+This script is experimental. It is intended for installing additional software on RMS meteor stations based on Raspberry Pi.
+Before starting the installation, save all data and create a backup copy of the data.
 Do you understand all the risks and want to continue the installation?
 (y/n)
 "
@@ -90,7 +90,7 @@ EOF"
 				pip install --trusted-host pypi.org --trusted-host pypi.python.org --trusted-host files.pythonhosted.org dropbox
 
 				# Install supported library Yandex-disk
-				cd source
+				cd ~/source
 				git clone https://github.com/ivknv/yadisk
 				cd yadisk
 				git checkout 45652154d017f8bc62a0ecc5079b0379a33a9689
@@ -190,7 +190,7 @@ EOF"
 				# Backup autostart config
 				sudo cp --verbose /home/pi/.config/lxsession/LXDE-pi/autostart /home/pi/.config/lxsession/LXDE-pi/autostart.bak
 
-				string=$(( $(wc --lines /home/pi/.config/lxsession/LXDE-pi/autostart | awk '{print $1}')-2 ))
+				string=$(( $(wc --lines /home/pi/.config/lxsession/LXDE-pi/autostart | awk '{print $1}')-7 ))
 				#echo $string
 
 				sudo sed -i $string'a\
