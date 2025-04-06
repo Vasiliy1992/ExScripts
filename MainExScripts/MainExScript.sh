@@ -46,6 +46,9 @@ rmsExternal() {
 	printf "\n\n5. Upload archives to FTP-storage\n=================================\n"
 	"$LOCATION/ExScripts/UpArchives/UpArchives.sh"
 
+	# Write uptime
+	"$LOCATION/ExScripts/Utils/Uptime_logger.sh"
+
 	printf "\n\n6. Reboot RPi...\n"
 	sudo reboot
 }
