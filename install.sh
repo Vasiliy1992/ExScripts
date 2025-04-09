@@ -275,7 +275,7 @@ host SRMN
 		echo "
 
 # Check RMS log
-alias cklog='~/source/Utils/UserScripts/CheckLog.sh'
+alias cklog='~/source/ExScripts/Utils/CheckLog.sh'
 
 # Running an external script
 alias exscript='~/source/ExScripts/Utils/ExScript_last_dir.sh'
