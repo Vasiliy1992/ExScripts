@@ -14,6 +14,7 @@ up_archive(){
 		--protocol=29 \
 		--progress \
 		--stats \
+		--update \
 				$HOME/RMS_data/ArchivedFiles/*.tar.bz2 \
 				$SERVER:/home/srmn/archives/$ID
 }
