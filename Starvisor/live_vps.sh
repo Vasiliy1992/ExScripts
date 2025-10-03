@@ -18,6 +18,7 @@ ftp-upload \
 	--host $FTP_LIVE \
 	--user $USER_LIVE \
 	--password $PASSWD_LIVE \
+	--passive \
 	--as $ID'.jpg' \
 		$live
 
