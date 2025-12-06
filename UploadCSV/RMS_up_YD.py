@@ -4,21 +4,46 @@ import sys
 import yadisk
 
 
+# Path to the source folder (the first argument of the script)
 to_dir=sys.argv[1]
+
+# Path to the cloud folder (second script argument)
 from_dir=sys.argv[2]
+
+
+# Token (third script argument)
 TOKEN=sys.argv[3]
 
 
-def check_YD_token(y, TOKEN):
-    
+def check_YD_token(TOKEN: str):
+
+    """
+    Checks the connection to Yandex disk cloud storage.
+    Takes the token as arguments.
+    Return the Yandex disk object.
+    If the connection is successful, it displays a corresponding message,
+    if there is an error, it displays an error message and terminates the program.
+    """
+    y=yadisk.YaDisk(token=TOKEN)
     if y.check_token():
         print("\nToken the Yandex Disk is correct.")
     else:
         print("\nThe token the Yandex Disk is invalid or expired! \nClose program...")
-        exit()
+        sys.exit(1)
+    return y
 
 
 def YD_get_info(y):
+
+    """
+    Checks available disk space on the cloud.
+    Accepts a Yandex Disk object as an argument.
+    Displays information about
+    the total amount of disk space on the cloud,
+    the used space,
+    and the percentage of available memory.
+    """
+
     DiskInfo=y.get_disk_info()
     Name=(DiskInfo["user"])["display_name"]
     T=DiskInfo["total_space"]
@@ -34,9 +59,19 @@ def YD_get_info(y):
     if C>99: print('LOW DISK SPACE!')
 
 
-# https://yadisk.readthedocs.io/ru/latest/intro.html#examples
 def recursive_upload(y, from_dir, to_dir):
-    
+
+    """
+    https://yadisk.readthedocs.io/ru/latest/intro.html#examples
+
+    Recursive upload to Yandex Disk cloud storage.
+    Accepts a Yandex Disk object,
+    the path to the uploaded folder,
+    and the path in the cloud storage as arguments.
+    Creates directories in the cloud if necessary.
+    If unsuccessful, deletes the file from the original (temporary) folder.
+    """
+
     print('\nUpload files on Yandex-disk from', from_dir, 'to', to_dir)
     print(Boader)
     
@@ -57,13 +92,19 @@ def recursive_upload(y, from_dir, to_dir):
             in_path = os.path.join(from_dir, p_sys, file)
             try:
                 y.upload(in_path, file_path)
-                print( 'Uploading', in_path, 'to', file_path )
+                print( 'Uploading', in_path, 'to', dir_path )
             except yadisk.exceptions.PathExistsError:
-                print('File', file, 'in', file_path, 'already upload!')
+                print('File', file, 'in', dir_path, 'already upload!')
                 pass
 
 
 def share_link(y, to_dir):
+
+    """
+    Displays a public link to cloud storage.
+    Accepts a Yandex Disk object and the path to the cloud folder as arguments.
+    """
+
     try:
         y.publish(to_dir)
         Link=y.get_meta(to_dir)['public_url']
@@ -73,10 +114,9 @@ def share_link(y, to_dir):
 
 
 if __name__ == "__main__":
-    Boader='--------------------------------------------------------------------------------'
-    y=yadisk.YaDisk(token=TOKEN)
-
-    check_YD_token(y, TOKEN)
+    Boader='-' * 80
+    y = check_YD_token(TOKEN)
     YD_get_info(y)
     recursive_upload(y, from_dir, to_dir)
     share_link(y, to_dir)
+

@@ -185,7 +185,7 @@ cp_fold_csv() {
 		fi
 	elif [ -s ./fold_index.list ]; then
 		#echo -e "\nCSV folder not found!"
-		# Copy csv from folders 
+		# Copy csv from folders
 		cp_csv $ARCH $tempFold $tempFold/fold_index.list
 
 		# Add folder list to csv list (copied to already copied)
@@ -228,9 +228,23 @@ upload_files() {
 	echo $line
 	python3 $LOCATION/RMS_up_YD.py $YDfold $tempFold/upload $YDtoken
 	# python3 SCRIPT CLOUD_FOLDER LOCAL_FOLDER TOKEN
+
+	# Yandex Disk upload script completion code
+	EXIT_CODE_YD=$?
+
 	echo $line
 	python $LOCATION/RMS_up_Dx.py $Dxfold $tempFold/upload $APP_KEY $SECRET_KEY $REFRESH_TOKEN
 	# python3 SCRIPT CLOUD_FOLDER LOCAL_FOLDER APP_KEY SECRET_KEY REFRESH_TOKEN
+
+	# Dropbox upload script completion code
+	EXIT_CODE_DX=$?
+
+	# Exit the program if any boot script terminates abnormally
+	if [[ $EXIT_CODE_YD -ne 0 || $EXIT_CODE_DX -ne 0 ]]; then
+		echo -e "\nWARNING! ERROR UPLOADING FILES!\n"
+		rm --recursive --force $tempFold
+		exit 1
+	fi
 }
 
 
@@ -273,15 +287,15 @@ main_func() {
 		if [ "$temp_CSV" -eq 0 ]; then
 			echo -e "\nThe number of new csv files is equal $temp_CSV. Close script."
 		else
-			# Sorting dsv files for storage at the station
-			sort_csv_for_rpi $tempFold $CSV
-
 			# Sorting csv files for uploading to cloud storage
 			sort_csv_for_cloud $tempFold $tempFold/upload
 
 			# Uploading csv files to cloud storage
 			upload_files
-		fi 
+
+			# Sorting dsv files for storage at the station
+			sort_csv_for_rpi $tempFold $CSV
+		fi
 
 		# Deleting temporary folders after finishing work
 		rm --recursive --force $tempFold
