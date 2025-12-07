@@ -77,7 +77,7 @@ def space_usage(dbx):
     print('Used: ', used, '%', sep='')
 
 
-def recursive_upload(dbx, from_dir: str, to_dir: str):
+def recursive_upload(dbx, from_dir, to_dir):
 
     """
     Recursive upload to Dropbox cloud storage.
@@ -112,7 +112,7 @@ def recursive_upload(dbx, from_dir: str, to_dir: str):
                 dbx.files_upload(file.read(), file_path, mode=dropbox.files.WriteMode.overwrite)
 
 
-def share_folder(dbx, to_dir: str):
+def share_folder(dbx, to_dir):
 
     """
     Displays a public link to cloud storage.
