@@ -1,3 +1,4 @@
+from __future__ import print_function
 import posixpath
 import os
 import sys
@@ -128,4 +129,3 @@ if __name__ == "__main__":
     space_usage(dbx)
     recursive_upload(dbx, from_dir, to_dir)
     share_folder(dbx, to_dir)
-
