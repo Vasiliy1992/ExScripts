@@ -23,15 +23,14 @@
 
 Обратитесь к [автору проекта](https://vk.com/rdaneel_olivaw) для получения [конфигурационного файла загрузки csv-файлов](UploadCSV/.up_csv.cfg) в облачные хранилища [Dropbox](https://www.dropbox.com/scl/fo/yikgso2z4ryaomtkzf4k5/h?rlkey=lts3izkjqrjdbonw66yd7gutk&st=rjbr3pwz&dl=0) и [Яндекс-диск](https://disk.yandex.ru/d/OZFWYsc6uEfvCQ),  а также для получения [конфигурационного файла загрузки архивов на FTP-сервер](UpArchives/.uparchives.cfg), **IP**-адреса, номера порта, логина и пароля.
 
-Также свяжитесь с [Ильёй Янковским](https://vk.com/jankowsky) для создания [персональной страницы станции](https://starvisor.ru/meteor/) на сайте [проекта Starvisor](https://starvisor.ru/contacts/). После этого вы получите [третий конфигурационный файл загрузки](Starvisor/.starvisor.cfg).
+Также свяжитесь с [Ильёй Янковским](https://vk.com/jankowsky) для создания [персональной страницы станции](https://starvisor.ru/meteor/) на сайте [проекта Starvisor](https://starvisor.ru/contacts/). После этого вы получите [конфигурационный файл загрузки](Starvisor/.starvisor.cfg).
 
 В конечном итоге вы должны получить:
 
 * Персональную страницу на сайте [проекта Starvisor](https://starvisor.ru/meteor/);
-* Три конфигурационных файла (обратите внимание, что файлы с точкой являются скрытыми. Включите отображение скрытых файлов!):
+* Два конфигурационных файла (обратите внимание, что файлы с точкой являются скрытыми. Включите отображение скрытых файлов!):
 
     - **.up_csv.cfg**  
-    - **.uparchives.cfg**  
     - **.starvisor.cfg**  
 
 * Адрес, порт;
@@ -170,13 +169,11 @@ git clone https://github.com/Vasiliy1992/ExScripts.git
 Поместите **с заменой** полученные вами ранее конфигурационные файлы
 
 - .up_csv.cfg  
-- .uparchives.cfg  
 - .starvisor.cfg  
 
 В соответствующие папки:
 
 - **~/source/ExScripts/UploadCSV**/.up_csv.cfg  
-- **~/source/ExScripts/UpArchives**/.uparchives.cfg 
 - **~/source/ExScripts/Starvisor**/.starvisor.cfg 
 
 где "**~**" - домашняя директория (**/home/pi** или **/home/rms** в последних сборках).  
@@ -281,7 +278,7 @@ sudo nano ~/.ssh/config
 Вставить:
 ```
 host SRMN
-	Hostname hostname
+	Hostname ru000q
 	User srmn
 	Port XXX
 ```
@@ -304,19 +301,21 @@ nano ~/.bashrc
 
 ```
 # Check RMS log
-alias cklog='~/source/ExScripts/Utils/CheckLog.sh'
+alias cklog='$HOME/source/ExScripts/Utils/CheckLog.sh'
 
 # Running an external script
-alias exscript='~/source/ExScripts/Utils/ExScript_last_dir.sh'
+alias exscript='$HOME/source/ExScripts/Utils/ExScript_last_dir.sh'
 
 # Upload archives
-alias uparch='~/source/ExScripts/UpArchives/UpArchives.sh'
+# Get station id
+ID=$(awk -F': ' '/stationID:/ {print $2}' ~/source/RMS/.config )
+alias uparch='$HOME/source/ExScripts/UpArchives.sh $ID'
 
 # Start TunnelIPCamera
-alias tnlcam='~/source/ExScripts/Utils/TunnelIPCamera.sh'
+alias tnlcam='$HOME/source/ExScripts/Utils/TunnelIPCamera.sh'
 
 # Upload CSV-files
-alias upcsv='~/source/ExScripts/UploadCSV/UploadCSV.sh'
+alias upcsv='$HOME/source/ExScripts/UploadCSV/UploadCSV.sh'
 ```
 Перезапустите:
 ```
