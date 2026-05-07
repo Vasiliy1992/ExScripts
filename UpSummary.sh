@@ -12,7 +12,7 @@ SERVER="SRMN"
 ARCH=$1
 
 # Station ID
-ID=$1
+ID=$2
 
 
 date
