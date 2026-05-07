@@ -1,8 +1,13 @@
 #!/bin/bash
 
-#############################################################################################
-# Script for extracting CSV files from archives with sorting and uploading to cloud storage #
-#############################################################################################
+########################################################################################################
+echo -e "\n Script for extracting CSV files from archives with sorting and uploading to cloud storage\n"
+########################################################################################################
+
+# The script receives three arguments:
+# $1 - path to the CapturedFiles folder;
+# $2 - path to the ArchivedFiles folder;
+# $3 - camera number ID.
 
 
 # Path to the current script
@@ -17,13 +22,12 @@ csv_list() {
 	# csv_list return:	csv_index.list		list with index of csv files
 
 	if [ -d $1 ]; then
-		cd $1
-		find . \
-			-maxdepth 3 \
-			-name '*.csv' | \
-					sed 's/.\{,15\}//;s/.\{,4\}$//' | \
-					 sort >> $2/csv_index.list
-		cd $OLDPWD
+
+		find $1 \
+			-maxdepth 4 \
+			-name '*.csv' \
+			-exec basename {} .csv \; | \
+							sort >> "$2/csv_index.list"
 	else
 		echo -e "\nFolder $1 not exist! CSV-files do not uploaded.\n"
 	fi
@@ -34,14 +38,13 @@ fold_list() {
 	# fold_list ARCH_FOLDER LIST_FOLDER
 	# fold_list return:	fold_index.list	list with index of folders
 
-	cd $1
-	find . \
+
+	find $1 \
 		-maxdepth 1 \
 		-type d \
-		-name '*_*_*_*' | \
-			sed 's/.\{,2\}//' | \
-						sort > $2/fold_index.list
-	cd $OLDPWD
+		-name '*_*_*_*' \
+		-exec basename {} \; | \
+					sort > "$2/fold_index.list"
 }
 
 
@@ -49,13 +52,12 @@ arch_list() {
 	# arch_list ARCH_FOLDER LIST_FOLDER
 	# arch_list return:	arch_index.list	list with index of archives
 
-	cd $1
-	find . \
+
+	find $1 \
 		-maxdepth 1 \
-		-name '*.tar.bz2' | \
-			sed 's/.\{,2\}//;s/.\{,17\}$//' | \
-						sort > $2/arch_index.list
-	cd $OLDPWD
+		-name '*.tar.bz2' \
+		-exec basename {} _detected.tar.bz2 \; | \
+							sort > $2/arch_index.list
 }
 
 
@@ -122,12 +124,13 @@ sort_csv_for_rpi() {
 
 	for file in $(find *.csv)
 		do
+			ID=${file:0:-27}
 			Year=${file:7:-22}
 			Month=${file:11:-20}
 
-			mkdir --parents $1/added/$Year/"$Month"_"$Year"
-			cp --recursive --force $file $1/added/$Year/"$Month"_"$Year"
-			echo "File $file moved to folder "$Year"/"$Month"_"$Year""
+			mkdir --parents $1/added/$ID/$Year/"$Month"_"$Year"
+			cp --recursive --force $file $1/added/$ID/$Year/"$Month"_"$Year"
+			echo "File $file moved to folder "$ID/$Year"/"$Month"_"$Year""
 		done
 
 	echo -e "\nCopy csv files to a local folder for storage: $2"

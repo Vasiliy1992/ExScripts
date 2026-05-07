@@ -12,6 +12,9 @@ echo -e "Working: directory: \n$1\n"
 # Captured stack pattern
 capstack="$1/*_captured_stack.jpg"
 
+# Get station id
+id=$(echo $2 | tr '[:upper:]' '[:lower:]')
+
 # Upload a stack to site
 ftp-upload \
 		--verbose \
@@ -19,7 +22,7 @@ ftp-upload \
 		--user $USER_LIVE \
 		--password $PASSWD_LIVE \
 		--passive \
-		--as $ID'.jpg' \
+		--as $id'.jpg' \
 			$capstack
 
 exit 0

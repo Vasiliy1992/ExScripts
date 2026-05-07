@@ -4,11 +4,18 @@
 # Running postprocess scripts (external scripts) #
 ##################################################
 
-# CapturedFiles folder (RMS reports)
+# CapturedFiles folder
 capt=$1
+
+# ArchivedFiles folder
+arch=$2
+
+# Station ID
+ID=$3
 
 # Folder for writing logs
 LOG_DIR="$HOME/RMS_data/logs/ExScript"
+
 
 # Folder with scripts location
 LOCATION=$(dirname \
@@ -18,11 +25,7 @@ LOCATION=$(dirname \
 
 
 print_logo() {
-	figlet \
-		-c \
-		-k \
-		-t \
-			"RMS EXTERNAL SCRIPT"
+	figlet -ckt "RMS EXTERNAL SCRIPT"
 	printf "STARTING EXTERNAL SCRIPT...\n"
 }
 
@@ -35,16 +38,16 @@ rmsExternal() {
 	"$LOCATION/ExScripts/Utils/CameraReboot.sh"
 
 	printf "\n\n2. Upload CapturedStack to www.starvisor.ru\n===========================================\n"
-	"$LOCATION/ExScripts/Starvisor/capstack.sh" $capt
+	"$LOCATION/ExScripts/Starvisor/capstack.sh" $capt $ID
 
 	printf "\n\n3. Upload csv-files to cloud storages\n=====================================\n"
 	"$LOCATION/ExScripts/UploadCSV/UploadCSV.sh"
 
-	printf "\n\n4. Starting Check_and_Clean\n===========================\n"
-	"$LOCATION/ExScripts/RMS_extra_tools/Check_and_Clean.sh" $capt
+	printf "\n\n4. Upload archives to FTP-storage\n=================================\n"
+	"$LOCATION/ExScripts/UpArchives.sh" $ID
 
-	printf "\n\n5. Upload archives to FTP-storage\n=================================\n"
-	"$LOCATION/ExScripts/UpArchives/UpArchives.sh"
+	printf "\n\n5. Upload report\n=================================\n"
+	"$LOCATION/ExScripts/UpSummary.sh" $arch $ID
 
 	# Write uptime
 	"$LOCATION/ExScripts/Utils/Uptime_logger.sh"

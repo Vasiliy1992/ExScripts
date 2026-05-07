@@ -275,19 +275,22 @@ host SRMN
 		echo "
 
 # Check RMS log
-alias cklog='~/source/ExScripts/Utils/CheckLog.sh'
+alias cklog='$HOME/source/ExScripts/Utils/CheckLog.sh'
 
 # Running an external script
-alias exscript='~/source/ExScripts/Utils/ExScript_last_dir.sh'
+alias exscript='$HOME/source/ExScripts/Utils/ExScript_last_dir.sh'
 
 # Upload archives
-alias uparch='~/source/ExScripts/UpArchives/UpArchives.sh'
+# Get station id
+ID=$(awk -F': ' '/stationID:/ {print $2}' ~/source/RMS/.config )
+alias uparch='$HOME/source/ExScripts/UpArchives.sh $ID'
 
 # Start TunnelIPCamera
-alias tnlcam='~/source/ExScripts/Utils/TunnelIPCamera.sh'
+alias tnlcam='$HOME/source/ExScripts/Utils/TunnelIPCamera.sh'
 
 # Upload CSV-files
-alias upcsv='~/source/ExScripts/UploadCSV/UploadCSV.sh'
+alias upcsv='$HOME/source/ExScripts/UploadCSV/UploadCSV.sh'
+
 " >> $HOME/.bashrc
 
 		echo "$HOME/.bashrc configured!"

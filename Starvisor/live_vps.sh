@@ -8,6 +8,9 @@
 # Get values from config file
 source $(dirname $0)/.starvisor.cfg
 
+# Get station id
+id=$(awk -F': ' '/stationID:/ {print $2}' ~/source/RMS/.config | tr '[:upper:]' '[:lower:]')
+
 # Path to image
 live=$HOME/RMS_data/live.jpg
 
@@ -19,7 +22,7 @@ ftp-upload \
 	--user $USER_LIVE \
 	--password $PASSWD_LIVE \
 	--passive \
-	--as $ID'.jpg' \
+	--as $id'.jpg' \
 		$live
 
 
@@ -32,7 +35,7 @@ ftp-upload \
 	--host $FTP_VPS \
 	--user $USER_VPS \
 	--password $PASSWD_VPS \
-	--dir $ID \
+	--dir $id \
 	--as $IMG'.jpg' \
 		$live
 
