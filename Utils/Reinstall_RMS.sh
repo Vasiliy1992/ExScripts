@@ -2,8 +2,6 @@
 
 ###################################################################
 # A script for reinstalling RMS. It backs up configuration files. #
-# A script for reinstalling RMS. It backs up configuration files. #
-# Works for both single- and multi-camera systems.                #
 ###################################################################
 
 
@@ -13,43 +11,55 @@ ID=$(awk -F': ' '/stationID:/ {print $2}' $HOME/source/RMS/.config)
 # Folder for backups
 BKP_FOLD=$HOME/"$ID"_backup_configs
 
+
 # Create backup folder
 mkdir --parents $BKP_FOLD
 
+
 # Backup configs
-cp --force --vebose $HOME/source/RMS/.config $BKP_FOLD/RMS
-cp --force --vebose $HOME/source/RMS/platepar_cmn210.cal $BKP_FOLD/RMS
-cp --force --vebose $HOME/source/RMS/mask.bmp $BKP_FOLD/RMS
+cp --preserve --verbose --update $HOME/source/RMS/.config $BKP_FOLD/RMS
+cp --preserve --verbose --update $HOME/source/RMS/platepar_cmn2010.cal $BKP_FOLD/RMS
+cp --preserve --verbose --update $HOME/source/RMS/mask.bmp $BKP_FOLD/RMS
 
 
-# Download RMS
 cd $HOME/source
-cp --recurce --force RMS RMS.old
-rm --recurce --force RMS
+
+
+# Remove old RMS backup
+rm --recursive --force RMS.old
+
+
+echo -e "\nBackup RMS folder:\n=================\n"
+mv --no-target-directory --verbose RMS RMS.old
+
+
+echo -e "\nDownload RMS:\n============\n"
 git clone https://github.com/CroatianMeteorNetwork/RMS.git
 cd RMS
 
 
-# Read the current computer's distribution
-DIST="$(cat /etc/os-release | awk -F"=" '/^PRETTY_NAME/{print $2}')"
+# Import PRETTY_NAME from /etc/os-release
+source /etc/os-release
 
 # Compare versions and get supported version
-if [ "$DIST" = "Raspbian GNU/Linux 8 (jessie)" ]; then
+if [ "$PRETTY_NAME" = "Raspbian GNU/Linux 8 (jessie)" ]; then
 	# For Raspberry Pi 3B+ Jessie
+	echo -e "\nGit checkout to legacy-python2 branch (for RPi3B+)\n"
 	git stash save --include-untracked
 	git fetch origin
 	git checkout legacy-python2
 fi
 
 
-# Install RMS
+echo -e "\nInstall RMS:\n===========\n"
 python setup.py install
 
 
-# Restore configs
-cp --force --vebose $BKP_FOLD/RMS/.config $HOME/source/RMS
-cp --force --vebose $BKP_FOLD/RMS/platepar_cmn210.cal $HOME/source/RMS
-cp --force --vebose $BKP_FOLD/RMS/mask.bmp $HOME/source/RMS
+echo -e "\nRestore configs:\n===============\n"
+cp --force --preserve --verbose $BKP_FOLD/RMS/.config $HOME/source/RMS
+cp --force --preserve --verbose $BKP_FOLD/RMS/platepar_cmn2010.cal $HOME/source/RMS
+cp --force --preserve --verbose $BKP_FOLD/RMS/mask.bmp $HOME/source/RMS
 
+
+echo -e "\nSystem reboot..."
 sudo reboot
-
