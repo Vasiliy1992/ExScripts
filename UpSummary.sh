@@ -18,6 +18,7 @@ ID=$2
 date
 
 scp \
+	-p \
 	$ARCH/"$(basename $ARCH)_observation_summary.json" \
 	$SERVER:"/home/srmn/observation_reports/"$ID
 exit 0
