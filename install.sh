@@ -3,9 +3,10 @@
 # Automatic installation script
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! #
+# Tested on Raspberry Pi3 Jessie   #
 # Tested on Raspberry Pi4 buster   #
 # Tested on Raspberry Pi4 billseye #
-# Tested on Raspberry Pi3 Jessie   #
+# Tested on Raspberry Pi4 trixie   #
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! #
 
 
@@ -57,6 +58,9 @@ case $var in
 
 		# New distribution of RPi4
 		BULLSEYE='"Debian GNU/Linux 11 (bullseye)"'
+
+		# New distribution of RPi4&5
+		TRIXIE='"Debian GNU/Linux 13 (trixie)"'
 
 		# Read the current computer's distribution
 		DIST="$(cat /etc/os-release | awk -F"=" '/^PRETTY_NAME/{print $2}')"
@@ -131,7 +135,7 @@ EOF"
 			;;
 
 
-			"$BULLSEYE")
+			"$BULLSEYE"|"TRIXIE")
 
 				# Update package list
 				sudo apt-get update
@@ -217,15 +221,26 @@ EOF"
 				sudo cp --verbose /etc/xdg/lxsession/LXDE-pi/autostart /etc/xdg/lxsession/LXDE-pi/autostart.bak
 
 				string=$(( $(wc --lines /etc/xdg/lxsession/LXDE-pi/autostart | awk '{print $1}')-1 ))
-				#echo $string
-
-# sed: couldn't open temporary file /etc/xdg/lxsession/LXDE-pi/sedKhFqtn: Permission denied
 
 				sudo sed -i $string'a\
 # Starvisor\
 /home/rms/source/ExScripts/Starvisor/entr_run.sh &\
 ' /etc/xdg/lxsession/LXDE-pi/autostart
 			;;
+
+			"TRIXIE")
+echo "
+[Desktop Entry]
+Type=Application
+Name=entr
+Comment=Start entr for starvisor
+Exec=bash -c "/home/rms/source/ExScripts/Starvisor/entr_run.sh"
+Terminal=false
+NoDisplay=true
+StartupNotify=false
+" >>/home/rms/.config/autostart/start_entr.desktop
+			;;
+
 		esac
 
 		echo "Autostart configured!"
