@@ -178,7 +178,7 @@ EOF"
 			sed -i 's\external_script_path: /home/dvida/Desktop/rms_external.py\external_script_path: /home/pi/source/ExScripts/MainExScript.py\' $HOME/source/RMS/.config
 		fi
 
-		sed -i 's\reboot_after_processing: true\reboot_after_processing: false\' $HOME/source/RMS/.config
+		#sed -i 's\reboot_after_processing: true\reboot_after_processing: false\' $HOME/source/RMS/.config
 		sed -i 's\log_dir: logs\log_dir: logs/RMS_logs\' $HOME/source/RMS/.config
 		sed -i 's\live_jpg: false\live_jpg: true\' $HOME/source/RMS/.config
 

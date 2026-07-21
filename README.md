@@ -207,7 +207,7 @@ external_script_path: /home/rms/source/ExScripts/MainExScript.py
 external_script_run: true
 
 ; Reboot the computer daily after processing and upload
-reboot_after_processing: false
+reboot_after_processing: true
 
 ; Directory for log files
 log_dir: logs/RMS_logs
