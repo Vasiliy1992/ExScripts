@@ -95,7 +95,11 @@ logger() {
 
 
 main() {
+	# Create a file to prevent system reboot while running an external script
+	touch $HOME/RMS_data/.reboot_lock
 	ck_internet
+	rm $HOME/RMS_data/.reboot_lock
+
 }
 
 
