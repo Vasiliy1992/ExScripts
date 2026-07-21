@@ -17,6 +17,13 @@ ID=$3
 LOG_DIR="$HOME/RMS_data/logs/ExScript"
 
 
+# Host for checking internet connection
+CHECK_HOST="8.8.8.8"
+
+# Internet connection wait time
+WAIT_TIME=1800
+
+
 # Folder with scripts location
 LOCATION=$(dirname \
 		$(readlink \
@@ -26,7 +33,7 @@ LOCATION=$(dirname \
 
 print_logo() {
 	figlet -ckt "RMS EXTERNAL SCRIPT"
-	printf "STARTING EXTERNAL SCRIPT...\n"
+	printf "STARTING EXTERNAL SCRIPT ...\n"
 }
 
 
@@ -49,11 +56,28 @@ rmsExternal() {
 	printf "\n\n5. Upload report\n=================================\n"
 	"$LOCATION/ExScripts/UpSummary.sh" $arch $ID
 
+	printf "\n\n6. Cleaning up old logs\n=======================\n"
+	"$LOCATION/ExScripts/Utils/ClearLogs.sh"
+
 	# Write uptime
 	"$LOCATION/ExScripts/Utils/Uptime_logger.sh"
 
-	printf "\n\n6. Reboot RPi...\n"
-	sudo reboot
+}
+
+
+ck_internet() {
+	# Endless waiting cycle
+	while true; do
+		echo "Checking internet connection ..."
+		if ping -c 5 "$CHECK_HOST" &> /dev/null; then
+			echo "Internet connection established!"
+			print_logo
+			rmsExternal
+			break
+		fi
+		echo "Internet connection not established! Waiting $WAIT_TIME seconds."
+		sleep $WAIT_TIME
+	done
 }
 
 
@@ -71,8 +95,7 @@ logger() {
 
 
 main() {
-	print_logo
-	rmsExternal
+	ck_internet
 }
 
 
