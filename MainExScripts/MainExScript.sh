@@ -58,10 +58,6 @@ rmsExternal() {
 
 	printf "\n\n6. Cleaning up old logs\n=======================\n"
 	"$LOCATION/ExScripts/Utils/ClearLogs.sh"
-
-	# Write uptime
-	"$LOCATION/ExScripts/Utils/Uptime_logger.sh"
-
 }
 
 
