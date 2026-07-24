@@ -39,25 +39,28 @@ print_logo() {
 
 rmsExternal() {
 
-	printf "\nCurrent captured dir: \n$capt \n==============================================================\n"
+        printf "\nCurrent captured dir: \n$capt \n==============================================================\n"
 
-	printf "\n\n1. Reboot camera\n================\n"
-	"$LOCATION/ExScripts/Utils/CameraReboot.sh"
+        printf "\n\n1. Reboot camera\n================\n"
+        "$LOCATION/ExScripts/Utils/CameraReboot.sh"
 
-	printf "\n\n2. Upload CapturedStack to www.starvisor.ru\n===========================================\n"
-	"$LOCATION/ExScripts/Starvisor/capstack.sh" $capt $ID
+        printf "\n\n2. Upload CapturedStack to www.starvisor.ru\n===========================================\n"
+        "$LOCATION/ExScripts/Starvisor/capstack.sh" $capt $ID
 
-	printf "\n\n3. Upload csv-files to cloud storages\n=====================================\n"
-	"$LOCATION/ExScripts/UploadCSV/UploadCSV.sh"
+        printf "\n\n3. Uploading a timelapse to the Starvisor project server\n========================================================\n"
+        "$LOCATION/ExScripts/Starvisor/up_timelapse.sh"
 
-	printf "\n\n4. Upload archives to FTP-storage\n=================================\n"
-	"$LOCATION/ExScripts/UpArchives.sh" $ID
+        printf "\n\n4. Upload csv-files to cloud storages\n=====================================\n"
+        "$LOCATION/ExScripts/UploadCSV/UploadCSV.sh"
 
-	printf "\n\n5. Upload report\n=================================\n"
-	"$LOCATION/ExScripts/UpSummary.sh" $arch $ID
+        printf "\n\n5. Upload archives to FTP-storage\n=================================\n"
+        "$LOCATION/ExScripts/UpArchives.sh" $ID
 
-	printf "\n\n6. Cleaning up old logs\n=======================\n"
-	"$LOCATION/ExScripts/Utils/ClearLogs.sh"
+        printf "\n\n6. Upload report\n=================================\n"
+        "$LOCATION/ExScripts/UpSummary.sh" $arch $ID
+
+        printf "\n\n7. Cleaning up old logs\n=======================\n"
+        "$LOCATION/ExScripts/Utils/ClearLogs.sh"
 }
 
 
@@ -91,11 +94,7 @@ logger() {
 
 
 main() {
-	# Create a file to prevent system reboot while running an external script
-	touch $HOME/RMS_data/.reboot_lock
 	ck_internet
-	rm $HOME/RMS_data/.reboot_lock
-
 }
 
 
