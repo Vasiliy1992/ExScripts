@@ -48,7 +48,7 @@ rmsExternal() {
         "$LOCATION/ExScripts/Starvisor/capstack.sh" $capt $ID
 
         printf "\n\n3. Uploading a timelapse to the Starvisor project server\n========================================================\n"
-        "$LOCATION/ExScripts/Starvisor/up_timelapse.sh"
+        "$LOCATION/ExScripts/Starvisor/up_timelapse.sh" $arch
 
         printf "\n\n4. Upload csv-files to cloud storages\n=====================================\n"
         "$LOCATION/ExScripts/UploadCSV/UploadCSV.sh"
