@@ -18,7 +18,9 @@ LOG_DIR="$HOME/RMS_data/logs/ExScript"
 
 
 # Host for checking internet connection
-CHECK_HOST="ya.ru"
+#CHECK_HOST="8.8.8.8"
+#CHECK_HOST="ya.ru"
+CHECK_HOST="starvisor.ru"
 
 # Internet connection wait time
 WAIT_TIME=1800
