@@ -135,7 +135,7 @@ EOF"
 			;;
 
 
-			"$BULLSEYE"|"TRIXIE")
+			"$BULLSEYE"|"$TRIXIE")
 
 				# Update package list
 				sudo apt-get update
@@ -228,7 +228,7 @@ EOF"
 ' /etc/xdg/lxsession/LXDE-pi/autostart
 			;;
 
-			"TRIXIE")
+			"$TRIXIE")
 echo "
 [Desktop Entry]
 Type=Application
