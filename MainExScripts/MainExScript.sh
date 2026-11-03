@@ -18,9 +18,9 @@ LOG_DIR="$HOME/RMS_data/logs/ExScript"
 
 
 # Host for checking internet connection
-#CHECK_HOST="8.8.8.8"
-#CHECK_HOST="ya.ru"
-CHECK_HOST="starvisor.ru"
+HOST1="8.8.8.8"
+HOST2="ya.ru"
+HOST3="starvisor.ru"
 
 # Internet connection wait time
 WAIT_TIME=1800
@@ -70,7 +70,10 @@ ck_internet() {
 	# Endless waiting cycle
 	while true; do
 		echo "Checking internet connection ..."
-		if ping -c 5 "$CHECK_HOST" &> /dev/null; then
+		if ping -c 5 "$HOST1" &> /dev/null || \
+		   ping -c 5 "$HOST2" &> /dev/null || \
+		   ping -c 5 "$HOST3" &> /dev/null;
+		then
 			echo "Internet connection established!"
 			print_logo
 			rmsExternal
