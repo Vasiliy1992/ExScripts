@@ -310,8 +310,15 @@ alias upcsv='$HOME/source/ExScripts/UploadCSV/UploadCSV.sh'
 
 		echo "$HOME/.bashrc configured!"
 
-		echo -e "\nInstallation complete! Reboot RPi..."
-		sudo reboot
+		read -p "Installation complete! Reboot the system? (y/N) " confirm
+
+		if [[ "$confirm" =~ ^[Yy]$ ]]; then
+			echo "System reboot..."
+			sudo reboot
+		else
+			echo "Reboot canceled."
+			exit 0
+		fi
 	;;
 
 
