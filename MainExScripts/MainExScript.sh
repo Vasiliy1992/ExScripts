@@ -18,9 +18,10 @@ LOG_DIR="$HOME/RMS_data/logs/ExScript"
 
 
 # Host for checking internet connection
-HOST1="8.8.8.8"
+HOST1="starvisor.ru"
 HOST2="ya.ru"
-HOST3="starvisor.ru"
+HOST3="dropbox.com"
+HOST4='ru000q'
 
 # Internet connection wait time
 WAIT_TIME=1800
@@ -40,28 +41,35 @@ print_logo() {
 
 
 rmsExternal() {
+        local step=0
+        local line=$(printf '%60s' '' | tr ' ' '=')
 
-        printf "\nCurrent captured dir: \n$capt \n==============================================================\n"
+        print_step() {
+                step=$((step + 1))
+                printf "\n\n%d. %s\n%s\n" "$step" "$1" "$line"
+        }
 
-        printf "\n\n1. Reboot camera\n================\n"
+        printf "\nCurrent captured dir: \n%s\n%s\n" "$capt" "$line"
+
+        print_step "Reboot camera"
         "$LOCATION/ExScripts/Utils/CameraReboot.sh"
 
-        printf "\n\n2. Upload CapturedStack to www.starvisor.ru\n===========================================\n"
-        "$LOCATION/ExScripts/Starvisor/capstack.sh" $capt $ID
+#        print_step "Upload CapturedStack to www.starvisor.ru"
+#        "$LOCATION/ExScripts/Starvisor/capstack.sh" "$capt" "$ID"
 
-        printf "\n\n3. Uploading a timelapse to the Starvisor project server\n========================================================\n"
-        "$LOCATION/ExScripts/Starvisor/up_timelapse.sh" $arch
+#        print_step "Uploading a timelapse to the Starvisor project server"
+#        "$LOCATION/ExScripts/Starvisor/up_timelapse.sh" "$arch"
 
-        printf "\n\n4. Upload csv-files to cloud storages\n=====================================\n"
+        print_step "Upload csv-files to cloud storages"
         "$LOCATION/ExScripts/UploadCSV/UploadCSV.sh"
 
-        printf "\n\n5. Upload archives to FTP-storage\n=================================\n"
-        "$LOCATION/ExScripts/UpArchives.sh" $ID
+        print_step "Upload archives to FTP-storage"
+        "$LOCATION/ExScripts/UpArchives.sh" "$ID"
 
-        printf "\n\n6. Upload report\n=================================\n"
-        "$LOCATION/ExScripts/UpSummary.sh" $arch $ID
+        print_step "Upload report"
+        "$LOCATION/ExScripts/UpSummary.sh" "$arch" "$ID"
 
-        printf "\n\n7. Cleaning up old logs\n=======================\n"
+        print_step "Cleaning up old logs"
         "$LOCATION/ExScripts/Utils/ClearLogs.sh"
 }
 
@@ -72,7 +80,8 @@ ck_internet() {
 		echo "Checking internet connection ..."
 		if ping -c 5 "$HOST1" &> /dev/null || \
 		   ping -c 5 "$HOST2" &> /dev/null || \
-		   ping -c 5 "$HOST3" &> /dev/null;
+		   ping -c 5 "$HOST3" &> /dev/null || \
+		   ping -c 5 "$HOST4" &> /dev/null;
 		then
 			echo "Internet connection established!"
 			print_logo
